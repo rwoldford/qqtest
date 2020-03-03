@@ -1,0 +1,186 @@
+---
+title: "The K distribution"
+author: "R. Wayne Oldford"
+#date: "`r Sys.Date()`"
+output: 
+  rmarkdown::html_vignette:
+    fig_caption: yes
+vignette: >
+  %\VignetteIndexEntry{The K distribution}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+```{r, setup, echo=FALSE}
+library(qqtest)
+```
+
+# Definition
+
+Suppose $X \sim \chi^2_m$ is a Chi-squared random variate on $m$ degrees of freedom. Then the distribution of
+\[Y = \sqrt{\frac{X}{m}}\]
+is the *Kay* distribution on $m$ degrees of freedom, written as
+\[Y \sim K_m.\]
+Its density is
+\[f(y) = \left\{\begin{array}{lcl}
+    \frac{m^{\frac{m}{2}} y ^{m-1} e^{-\frac{1}{2} m y^2}} {2^{\frac{m}{2}-1} \Gamma(\frac{m}{2})} &~~~& \text{for} ~~ 0 \le y < \infty \\
+    &&\\
+    0 && \text{otherwise}.
+    \end{array}
+    \right.
+\]
+
+The $K_m$ density has some very attractive features over the $\chi^2_m$ density:
+
+- $K_m$ has a much more symmetric density than had the $\chi^2_m$, for any $m$;
+- like a $\chi^2_m$ density a $K_m$ density, as $m \rightarrow \infty$ $K_m$  becomes more symmetric and nearly normally distributed but does both faster than a $\chi^2_m$; 
+- as $m \uparrow$, the $K_m$ density concentrates around the value $y=1$, rather than heading off to $\infty$ like the $\chi^2_m$;
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE, fig.align="center", fig.width=7, fig.height=4, fig.cap="As m increases, Km has better properties"}
+# compare K density to that of chi as degrees of freedom increase
+op <-par(mfrow=c(1,2))
+p <- seq(0.001, .999, 0.001)
+#
+# First get all the chi-square densities and plot them
+xchi5 <- qchisq(p,5)
+dchi5 <- dchisq(xchi5,5)
+xchi10 <- qchisq(p,10)
+dchi10 <- dchisq(xchi10,10)
+xchi20 <- qchisq(p,20)
+dchi20 <- dchisq(xchi20,20)
+xchi30 <- qchisq(p,30)
+dchi30 <- dchisq(xchi20,30)
+xlim <- range(xchi5, xchi10, xchi20, xchi30)
+ylim <- range(dchi5, dchi10, dchi20, dchi30)
+plot(xchi5, dchi5, type="l", xlab="x", ylab="density", 
+     xlim=xlim, ylim=ylim,  
+     main="chi-squared densities", col="steelblue")
+lines(xchi10, dchi10, lty=2, col="steelblue")
+lines(xchi20, dchi20, lty=3, col="steelblue")
+lines(xchi20, dchi30, lty=4, col="steelblue")
+legend("topright",  
+       legend=c("df = 5", "df = 10", "df = 20", "df = 30"),  
+       lty=c(1,2,3,4),  
+       title="degrees of freedom",  
+       cex=0.75, bty="n", col="steelblue")
+#
+# Now get all the K densities and plot them
+xkay5 <- qkay(p,5)
+dkay5 <- dkay(xkay5,5)
+xkay10 <- qkay(p,10)
+dkay10 <- dkay(xkay10,10)
+xkay20 <- qkay(p,20)
+dkay20 <- dkay(xkay20,20)
+xkay30 <- qkay(p,30)
+dkay30 <- dkay(xkay20,30)
+xlim <- range(xkay5, xkay10, xkay20, xkay30)
+ylim <- range(dkay5, dkay10, dkay20, dkay30)
+plot(xkay5, dkay5, type="l",  
+     xlab="y", ylab="density", 
+     xlim=xlim, ylim=ylim,  
+     main="K densities", col="steelblue")
+lines(xkay10, dkay10, lty=2, col="steelblue")
+lines(xkay20, dkay20, lty=3, col="steelblue")
+lines(xkay20, dkay30, lty=4, col="steelblue")
+abline(v=1, col="grey", lty=5)
+legend("topright",  
+       legend=c("df = 5", "df = 10", "df = 20", "df = 30"),  
+       lty=c(1,2,3,4),  
+       title="degrees of freedom",  
+       cex=0.75, bty="n", col="steelblue")
+par(op)
+```
+
+These values were calculated using the `dkay(...)` density function.  For example, `dkay(1.0, df=10) = ` `r dkay(1.0, df=10)`.
+
+## Normal theory relations
+Perhaps the most obvious relation between a normal random variate and a $K_m$ is that if $Z \ sim N(0,1)$, then $|Z|\sim K_1$.
+
+More important in applications is that distribution of the estimator of the sample standard deviation is proportional to a $K_m$.  To be precise, if $Y_1, \ldots, Y_n$ are independent and identically distributed as $N(\mu, \sigma^2)$ random variates, with realizations $y_1, \ldots, y_n$ and the usual estimates $\widehat{\mu} = \sum y_i /n$ and $\widehat{\sigma} = \sqrt{\sum (y_i - \widehat{\mu})^2/(n-1)}$, then the corresponding estimators $\widetilde{\mu}$ and $\widetilde{\sigma}$ are distributed as
+\[ \widetilde{\mu} \sim N(\mu, \frac{\sigma^2}{n})  ~~~~~\text{and} ~~~~~  \frac{\widetilde{\sigma}}{\sigma} \sim K_{n-1}. \]
+The latter shows that $K_m$ is used for inference (e.g. tests and confidence intervals) about $\sigma$.
+
+This is handy because the $K_m$ quantiles vary much less than do those of $\chi^2_m$.  For example, condider the following table of the cumulative distribution.
+
+```{r, echo=FALSE, results='asis'}
+df <- c(1:10,seq(15, 40, 5))
+p <- c( 0.05, 0.5, 0.95)
+fun <- function(p) qkay(p,df)
+table <- as.data.frame(cbind(df,sapply(p, fun)))
+colnames(table) <- c("df", paste0("p=", p))
+knitr::kable(table)
+```
+
+Unlike the $\chi^2_m$ distribution, the quantiles in this table stabilize, allowing $1 \pm 0.20$ being not a bad rule of thumb for a $90\%$ probability of the ratio $\widetilde{\sigma}/\sigma$.
+
+These values were calculated using the `qkay(...)` quantile function.  For example, `qkay(0.05, df=5) = ` `r qkay(0.05, df=5)`.  These would be used to construct interval estimates for $\sigma$.  
+
+To get observed significance levels, the cumulative distribution function `pkay(...)` would be used.  For example, `SL = 1- pkay(1.4, df=10) = 1 -` `r pkay(1.4, df=10)` `=` `r 1- pkay(1.4, df=10)`.
+
+### The Student t distribution
+
+For the standard normal theory, the Student $t_m$ distribution can be defined as follows. If $Z \sim N(0,1)$ and $Y \sim K_m$ is distributed independently of $Z$, then the ratio
+\[T=\frac{Z}{Y} = \frac{N(0,1)}{K_m} = t_m.\]
+For the estimators from the above model
+\[\frac{\widetilde{\mu} - \mu}
+       {\widetilde{\sigma}} 
+       = \frac{ \frac{\widetilde{\mu}-\mu}
+                     {\sigma}
+                     }
+              {\frac{\widetilde{\sigma}}
+                    {\sigma}
+                    }
+               = \frac{N(0,1)}{K_m} = t_m\]
+is used to construct interval estimates and tests for the value of the parameter $\mu$.
+
+# The functions
+As with every other distribution in `R` four functions are provided for the $K_m$ distribution. These are
+
+- `dkay(x, df=m, ...)` which evalutes the density of $K_m$ at $x$,
+- `pkay(x, df=m, ...)` which evalutes the distribution of $K_m$ at $x$,
+- `qkay(p, df=m, ...)` which evalutes the quantile of $K_m$ at the proportion $p$,
+- `rkay(n, df=m, ...)` which generates $n$ pseudo-random realizations from $K_m$.
+
+The parameters in the ellipsis include a non-centrality parameter.  All functions rely on the corresponding $\chi^2_m$ functions in base `R`.
+
+We briefly illustrate each below.
+
+## The density `dkay(x, df, ...)`
+
+```{r, warning=FALSE, message=FALSE, fig.align="center", fig.width=5, fig.height=4}
+x <- seq(0,2,0.01)
+plot(x, dkay(x, df=10), type="l", col="steelblue", 
+     main="Density", xlab="x", ylab="f(x)")
+abline(v=1.0, lty=2, col="grey")
+
+```
+
+## The cumulative distribution function `pkay(x, df, ...)`
+
+```{r, warning=FALSE, message=FALSE, fig.align="center", fig.width=5, fig.height=4}
+x <- seq(0,2,0.01)
+plot(x, pkay(x, df=10), type="l", col="steelblue", 
+     main="Distribution", xlab="x", ylab="F(x)")
+abline(v=1.0, lty=2, col="grey")
+
+```
+
+## The quantile function `qkay(p, df, ...)`
+
+```{r, warning=FALSE, message=FALSE, fig.align="center", fig.width=5, fig.height=4}
+x <- seq(0,2,0.01)
+p <- pkay(x, df=10)
+plot(p, qkay(p, df=10), type="l", col="steelblue", 
+     main="Quantile function", xlab="p", ylab="Q(p)")
+abline(h=1.0, lty=2, col="grey")
+
+```
+
+## Pseudo-random realizations `rkay(n, df, ...)`
+
+```{r, warning=FALSE, message=FALSE, fig.align="center", fig.width=5, fig.height=4}
+x <- rkay(1000, df=10)
+hist(x, col="steelblue", 
+     main="Pseudo-random numbers", xlab="x")
+abline(v=1.0, lty=2, col="grey")
+
+```
