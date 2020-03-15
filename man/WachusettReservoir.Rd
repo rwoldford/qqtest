@@ -29,4 +29,3 @@ First extensive published use of normal qqplots. Hazen uses a=1/2 to make the p 
 \code{qqtest(WachusettReservoir$draft800,dist="normal", a=1/2, type="o")} will effect Hazen's normal qq plot for a draft of 800,000 gallons per square mile daily.
 }
 \keyword{datasets}
-

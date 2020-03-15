@@ -42,4 +42,3 @@ Alternatively, for checking outliers a qqplot (via qqtest) could be used for eit
 \code{with(primer,qqtest(s,dist="kay", df=9, main ="Standard deviations"))} will effect this plot for s.
 }
 \keyword{datasets}
-

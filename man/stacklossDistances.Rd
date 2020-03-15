@@ -26,4 +26,3 @@ Under standard normal theory, these are approximately Chi-squared on 3 degrees o
 \code{with(stacklossDistances, qqtest(ordinary,dist="chi", df=3))} will show "inliers".
 }
 \keyword{datasets}
-

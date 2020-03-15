@@ -31,4 +31,3 @@ From measurements made by Francis Galton at London's International Health Exhibi
 \code{with(sittingHeights, qqtest(binCentre, dist="normal", p = proportionCumulativeAdjusted, np=775, main="Sitting heights of women in inches"))} will effect a normal qqplot for this data.
 }
 \keyword{datasets}
-

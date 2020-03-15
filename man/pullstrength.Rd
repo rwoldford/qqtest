@@ -28,4 +28,3 @@ From measurements made by Francis Galton at the International Health Exhibition 
 \code{qqtest(pullstrength$strength, p=pullstrength$percentAdjustedCumulative/100, np=519, dist="normal", main="Gaussian qqplot of pull strength for 519 males aged 23-26", xlab="Cumulative Proportions (Adjusted)",yAxisAsProbs=FALSE, ylab="Strength in lbs.", type="o")} will effect a normal qqplot for this data.
 }
 \keyword{datasets}
-

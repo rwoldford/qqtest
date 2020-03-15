@@ -20,14 +20,14 @@ pkay(q, df, ncp = 0, upper.tail = FALSE, log.p = FALSE)
 \value{
 \code{pkay} returns the value of the K cumulative distribution function, F(q), evaluated at \code{q} for the given \code{df} and \code{ncp}.  If \code{upper.trail = TRUE} then the upper tail probabilities 1-F(q) = Pr(Q>q) are returned instead of F(q).
 
-Invalid arguments will result in return value NaN, with a warning. 
+Invalid arguments will result in return value NaN, with a warning.
 
 The length of the result is the maximum of the lengths of the numerical arguments.
 
 The numerical arguments are recycled to the length of the result. Only the first elements of the logical arguments are used.
 }
 \description{
-The cumulative distribution function for the K distribution on \code{df} degrees of freedom having non-centrality parameter \code{ncp}.  
+The cumulative distribution function for the K distribution on \code{df} degrees of freedom having non-centrality parameter \code{ncp}.
 
    A K distribution is the square root of a chi-square divided by its degrees of freedom.  That is, if x is chi-squared on m degrees of freedom, then y = sqrt(x/m) is K on m degrees of freedom.
    Under standard normal theory, K is the distribution of the pivotal quantity  s/sigma where s is the sample standard deviation and sigma is the standard deviation parameter of the normal density.  K is the natural distribution for tests and confidence intervals about sigma.
@@ -43,20 +43,22 @@ q <- seq(0.01, 1.8, 0.01)
 #
 # Plot the cdf for K(5)
 u <- pkay(q,5)
-plot(q, u, type="l",  
-     xlab="q", ylab="cumulative probability", 
-     xlim=range(q), ylim=c(0,1),  
+plot(q, u, type="l",
+     xlab="q", ylab="cumulative probability",
+     xlim=range(q), ylim=c(0,1),
      main="K cdf")
 #
 # Add some other K cdfs
 lines(q, pkay(q,10), lty=2)
 lines(q, pkay(q,20), lty=3)
 lines(q, pkay(q,30), lty=4)
-legend("topleft",  
-       legend=c("df = 5", "df = 10", "df = 20", "df = 30"),  
-       lty=c(1,2,3,4),  
-       title="degrees of freedom",  
+legend("topleft",
+       legend=c("df = 5", "df = 10", "df = 20", "df = 30"),
+       lty=c(1,2,3,4),
+       title="degrees of freedom",
        cex=0.75, bty="n")
 
+#
+# See the vignette for more on the "K-distribution"
+#
 }
-

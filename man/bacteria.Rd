@@ -44,4 +44,3 @@ reproduces Whipple's 1915 plot.
 \code{with(bacteria, qqtest(data=log(count, 10), p=percentTime/100, np=365, dist="normal", type="o"))}
 }
 \keyword{datasets}
-

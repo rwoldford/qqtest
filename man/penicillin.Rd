@@ -29,4 +29,3 @@ be objective in judging whether or not the largest effects are real."
 \code{qqtest(penicillin[1],dist="half-normal")} will effect Daniel's plot.
 }
 \keyword{datasets}
-

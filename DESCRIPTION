@@ -1,8 +1,8 @@
 Package: qqtest
 Type: Package
 Title: Self Calibrating Quantile-Quantile Plots for Visual Testing
-Version: 1.1.1
-Date: 2016-02-23
+Version: 1.2.0
+Date: 2020-03-14
 Authors@R: person("Wayne", "Oldford", email="rwoldford@uwaterloo.ca",
     role=c("aut", "cre"))
 Maintainer: Wayne Oldford <rwoldford@uwaterloo.ca>
@@ -28,12 +28,12 @@ Depends:
     R (>= 2.10.0)
 Imports:
     grDevices,
-    robust,
     stats
 NeedsCompilation: no
-Packaged: 2016-01-22 16:47:10 EST; rwoldford
+Packaged: 2020-03-14 16:37:10 EST; rwoldford
 Author: Wayne Oldford [aut, cre]
-RoxygenNote: 5.0.1
+Encoding: UTF-8
+RoxygenNote: 7.0.2
 Suggests: knitr,
     rmarkdown
 VignetteBuilder: knitr

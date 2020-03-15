@@ -6,76 +6,213 @@
 \source{
 "Self calibrating quantile-quantile plots",
 R. Wayne Oldford, The American Statistician, 70, (2016)
+\url{https://doi.org/10.1080/00031305.2015.1090338}
 
 "Unbiased Plotting Positions -- A Review",
 C. Cunnane, Journal of Hydrology, Vol. 37 (1978), pp. 205-222.
 }
 \usage{
-qqtest(data, dist = c("gaussian", "normal", "log-normal", "half-normal",
-  "uniform", "exponential", "chi-squared", "kay", "student", "t"), df = 1,
-  qfunction = NULL, rfunction = NULL, dataTest = NULL, p = NULL,
-  a = NULL, np = NULL, xAxisAsProbs = FALSE, yAxisAsProbs = FALSE,
-  xAxisProbs = c(0.05, 0.25, 0.5, 0.75, 0.95), yAxisProbs = c(0.05, 0.25,
-  0.5, 0.75, 0.95), nreps = 1000, centralPercents = c(0.9, 0.95, 0.99),
-  envelope = TRUE, drawPercentiles = FALSE, drawQuartiles = FALSE,
-  legend = NULL, nexemplars = 0, typex = NULL, plainTrails = FALSE,
-  colTrails = NULL, alphaTrails = 0.25, lwdTrails = 1, lineup = FALSE,
-  nsuspects = 20, col = NULL, h = 260, c = 90, l = 60, alpha = 1,
-  cex = NULL, pch = 19, type = NULL, main = NULL, xlab = NULL,
-  ylab = NULL, xlim = NULL, ylim = NULL, axes = NULL, bty = "o", ...)
+qqtest(
+  data,
+  dist = c("gaussian", "normal", "log-normal", "half-normal", "uniform", "exponential",
+    "chi-squared", "kay", "student", "t"),
+  df = 1,
+  qfunction = NULL,
+  rfunction = NULL,
+  dataTest = NULL,
+  p = NULL,
+  a = NULL,
+  np = NULL,
+  matchMethod = c("hinges", "quartiles", "highbreakdown"),
+  xAxisAsProbs = FALSE,
+  yAxisAsProbs = FALSE,
+  xAxisProbs = c(0.05, 0.25, 0.5, 0.75, 0.95),
+  yAxisProbs = c(0.05, 0.25, 0.5, 0.75, 0.95),
+  nreps = 1000,
+  centralPercents = c(0.9, 0.95, 0.99),
+  envelope = TRUE,
+  drawPercentiles = FALSE,
+  drawQuartiles = FALSE,
+  legend = NULL,
+  legend.xy = "topleft",
+  legend.cex = 0.8,
+  nexemplars = 0,
+  typex = NULL,
+  plainTrails = FALSE,
+  colTrails = NULL,
+  alphaTrails = 0.25,
+  lwdTrails = 1,
+  lineup = FALSE,
+  nsuspects = 20,
+  col = NULL,
+  h = 260,
+  c = 90,
+  l = 60,
+  alpha = 1,
+  cex = NULL,
+  pch = 19,
+  type = NULL,
+  main = NULL,
+  xlab = NULL,
+  ylab = NULL,
+  xlim = NULL,
+  ylim = NULL,
+  axes = NULL,
+  bty = "o",
+  ...
+)
 }
 \arguments{
 \item{data}{A univariate dataset to be tested. If data has more than one column, the first is used.}
 
-\item{dist}{The name of the distribution against which the comparison is made, the test distribution for a few built-in distributions.  One of \code{"gaussian"} (or \code{"normal"}), \code{"log normal"},\code{"half normal"}, \code{"uniform"},\code{"exponential"},\code{"student"}, \code{"chi-squared"}, or \code{"kay"}.  Only the first three characters of any of these is needed to specify the dist.  If dist is \code{"student"},  \code{"chi-squared"}, or \code{"kay"}, then a value for the degrees of freedom argument (\code{df} below) is also required.}
+\item{dist}{The name of the distribution against which the comparison is made, the test distribution for a few built-in distributions.
+  One of \code{"gaussian"} (or \code{"normal"}), \code{"log normal"},\code{"half normal"},
+  \code{"uniform"},\code{"exponential"},\code{"student"}, \code{"chi-squared"}, or \code{"kay"}.
+  Only the first three characters of any of these is needed to specify the dist.
+
+  If dist is \code{"student"},  \code{"chi-squared"}, or \code{"kay"}, then a value for the degrees of freedom
+  argument (\code{df} below) is also required.}
 
 \item{df}{Degrees of freedom of \code{dist} to be used when \code{dist} is either \code{"student"} or \code{"chi-squared"}.}
 
-\item{qfunction}{If non-\code{NULL}, this must be a function of a single argument (a proportion, p say) which will be used to calculate the quantiles for the test distribution.  If non-\code{NULL}, the \code{rfunction} should also be non-\code{NULL}.  The value of the \code{dist} argument will be ignored when this is the case.}
+\item{qfunction}{If non-\code{NULL}, this must be a function of a single argument (a proportion, p say) which will be used
+to calculate the quantiles for the test distribution.  If non-\code{NULL}, the \code{rfunction} should also be non-\code{NULL}.
+The value of the \code{dist} argument will be ignored when this is the case.}
 
-\item{rfunction}{If non-\code{NULL}, this must be a function of a single argument (a count, n say) which will be used to randomly select a sample of size n from the test distribution.   If non-\code{NULL}, the \code{qfunction} must also be non-NULL.  If  \code{qfunction} is non-\code{NULL} and  \code{rfunction} is \code{NULL}, then \code{qfunction} will be applied to the output of a call to \code{runif} in place of the \code{NULL} \code{rfunction} (i.e. a probability integral transform is used to generate a random sample).  The value of the \code{dist} argument will be ignored whenever \code{qfunction} is a function.}
+\item{rfunction}{If non-\code{NULL}, this must be a function of a single argument (a count, n say) which will be
+used to randomly select a sample of size n from the test distribution.
+If non-\code{NULL}, the \code{qfunction} must also be non-NULL.
+If \code{qfunction} is non-\code{NULL} and  \code{rfunction} is \code{NULL}, then \code{qfunction} will
+be applied to the output of a call to \code{runif} in place of the \code{NULL} \code{rfunction}
+ (i.e. a probability integral transform is used to generate a random sample).
 
-\item{dataTest}{If non-\code{NULL}, this must be a second data set.  The empirical distribution given by this data will be used as the test distribution against which the value of data will be tested.   If non-\code{NULL}, the values of the arguments \code{dist}, \code{qfunction}, and \code{rfunction} will all be ignored in favour of using this empirical distribution as the test distribution.}
+ The value of the \code{dist} argument will be ignored whenever \code{qfunction} is a function.}
 
-\item{p}{If non-\code{NULL}, this must be a vector containing the probability points at which the quantiles are to be calculated.  If the length of this vector is the same as that of the data, then \code{p} is taken to be the probabilities that correspond to the data; otherwise the data are taken to provide and empirical quantile function values of which are  taken at \code{p} to produce the plot.  If \code{p} is \code{NULL} (the default), then \code{p} is determined by the function \code{ppoints(n,a)} where \code{n} is the number of data points in \code{data} and \code{a} is given by the argument \code{a} below.}
+\item{dataTest}{If non-\code{NULL}, this must be a second data set.
+The empirical distribution given by this data will be used as the test distribution against which the value of data will be tested.
+If non-\code{NULL}, the values of the arguments \code{dist}, \code{qfunction}, and \code{rfunction} will all be ignored in
+favour of using this empirical distribution as the test distribution.}
 
-\item{a}{This is the second parameter given to the \code{ppoints} call to determine \code{p} as necessary.  If \code{a} is \code{NULL}, then default values are chosen for each specific distribution (e.g. 3/8 for gaussian, 0 for uniform, etc.) and as 2/5 otherwise, following the recommendations of C. Cunnane (1978). Users may supply their own value such as the original Hazen's 1/2 or Tukey's 1/3.}
+\item{p}{If non-\code{NULL}, this must be a vector containing the probability points at which the quantiles are to be calculated.
+If the length of this vector is the same as that of the data, then \code{p} is taken to be the probabilities that
+correspond to the data; otherwise the data are taken to provide and empirical quantile function values of which are
+taken at \code{p} to produce the plot.
 
-\item{np}{This is required if the vector \code{p} is provided.  Because \code{p} could take any values, we need to know \code{np} the sample size that was used  to construct the  quantiles at the provided vlaues \code{p}.  When \code{p} and \code{np} are provided all simulation is based on simulating values from the distribution of the order statistics \code{p*np}.}
+If \code{p} is \code{NULL} (the default), then \code{p} is determined by the function \code{ppoints(n,a)}
+where \code{n} is the number of data points in \code{data} and \code{a} is given by the argument \code{a} below.}
 
-\item{xAxisAsProbs}{If \code{TRUE} (the default is FALSE) the horizontal axis will be labelled as probabilities.  These are the cumulative probabilities according to the test distribution.  They are located at the corresponding quantile values.  They are handy in comparing percentiles of the test and data distributions as well as giving some measure of the symmetry and tail weights of the test distribution by their location.  If \code{FALSE} the axis is labelled according to the quantile values.}
+\item{a}{This is the second parameter given to the \code{ppoints} call to determine \code{p} as necessary.
+If \code{a} is \code{NULL}, then default values are chosen for each specific distribution
+(e.g. 3/8 for gaussian, 0 for uniform, etc.) and as 2/5 otherwise, following the recommendations of C. Cunnane (1978).
+Users may supply their own value such as the original Hazen's 1/2 or Tukey's 1/3.}
 
-\item{yAxisAsProbs}{If \code{TRUE} (the default is FALSE) the vertical axis will be labelled as probabilities.  These are the cumulative probabilities according to the empirical distribution of the \code{data}.  They are located at the corresponding quantile values.  They are handy in comparing percentiles of the test and data distributions as well as giving some measure of the symmetry and tail weights of the \code{data} distribution by their location. If \code{FALSE} the axis is labelled according to the quantile values.}
+\item{np}{This is required if the vector \code{p} is provided.
+Because \code{p} could take any values, we need to know \code{np} the sample size that was used  to construct the
+quantiles at the provided vlaues \code{p}.
+When \code{p} and \code{np} are provided all simulation is based on simulating values from the distribution of
+the order statistics \code{p*np}.}
 
-\item{xAxisProbs}{A vector of probabilities to be used to label the x axis ticks when \code{xAxisAsProbs} is \code{TRUE}.  Default is \code{c(0.05, 0.25, 0.50, 0.75, 0.95)}.  Ignored if \code{xAxisAsProbs} is \code{FALSE}.}
+\item{matchMethod}{It is necessary to match locations and scales of the two distributions.  The method used to do this matching
+is given by \code{matchMethod} which must be one of \code{c("hinges","quartiles")}.
+A line is fitted to the data and its coefficients used to adjust the location and scale of the test quantiles to match the data.
 
-\item{yAxisProbs}{A vector of probabilities to be used to label the y axis ticks when \code{yAxisAsProbs} is \code{TRUE}.  Default is \code{c(0.05, 0.25, 0.50, 0.75, 0.95)}.  Ignored if \code{yAxisAsProbs} is \code{FALSE}.}
+If \code{matchMethod = "hinges"} (the default), then the line is fit to \code{(x, y)} pairs given by the three central values of
+\code{fivenum()} on each of the coordinates; if "quartiles" the three quartiles of each coordinate are paired and a line fit.
 
-\item{nreps}{The number of replicate samples to be taken from the test distribution to construct the pointwise intervals for each quantile.  Default is 1000.  From these samples, an empirical distribution is generated from the test distribution for the ordered quantiles corresponding to the values of\code{ppoints(length(data))}.  These are used to construct central intervals of whatever proportions are given by \code{centralPercents}.}
+Note that the user may supply their own matching method by providing a function having vector arguments \code{x} and \code{y}
+for the horizontal and vertical quantiles which returns a vector of coefficients (intercept, slope) for the line to be used to match
+the quantile location and scales.}
 
-\item{centralPercents}{The vector of proportions determining the central intervals of the empirical distribution of each ordered quantile from the test distribution.  Default is \code{c(0.90, 0.95, 0.99)} corresponding to central 90, 95, and 99\% simulated pointwise confidence intervals for each quantile coming from the test distribution for a sample the same size as \code{data}.The quality of these interval locations typically increases with \code{nreps} and decreases with the probability used for each interval.}
+\item{xAxisAsProbs}{If \code{TRUE} (the default is FALSE) the horizontal axis will be labelled as probabilities.
+These are the cumulative probabilities according to the test distribution.  They are located at the corresponding quantile values.
+They are handy in comparing percentiles of the test and data distributions as well as giving some measure of the symmetry and
+tail weights of the test distribution by their location.
+If \code{FALSE} the axis is labelled according to the quantile values.}
 
-\item{envelope}{If \code{TRUE} (the default), a grey envelope is plotted showing the central intervals for each quantile as a shade of grey.  The higher is the corresponding probability associated with the interval, the lighter is the shade.  The outermost edges of the envelope are the range of the simulated data from the test distribution.  The envelope thus provides a (pointwise) density estimate of the quantiles drawn from the test distribution for this sample size.   If \code{FALSE} no envelope is drawn.}
+\item{yAxisAsProbs}{If \code{TRUE} (the default is FALSE) the vertical axis will be labelled as probabilities.
+These are the cumulative probabilities according to the empirical distribution of the \code{data}.
+They are located at the corresponding quantile values.
+They are handy in comparing percentiles of the test and data distributions as well as giving
+some measure of the symmetry and tail weights of the \code{data} distribution by their location.
+If \code{FALSE} the axis is labelled according to the quantile values.}
 
-\item{drawPercentiles}{If \code{TRUE}, a pair of curves is plotted to show each of the central intervals as a different line type.  These are plotted over the envelope if \code{envelope} is \code{TRUE}. If \code{FALSE} (the default) no simulated percentile curves are drawn.}
+\item{xAxisProbs}{A vector of probabilities to be used to label the x axis ticks when \code{xAxisAsProbs} is \code{TRUE}.
+Default is \code{c(0.05, 0.25, 0.50, 0.75, 0.95)}.  Ignored if \code{xAxisAsProbs} is \code{FALSE}.}
 
-\item{drawQuartiles}{If \code{TRUE}, a pair of curves is plotted to show the quartiles (central 50\% region) of the ordered quantiles simulated from the test distribution.  The median of these is also plotted as a solid line type. These are plotted over the envelope if \code{envelope} is \code{TRUE}.  If \code{FALSE} (the default) none of these curves are drawn.}
+\item{yAxisProbs}{A vector of probabilities to be used to label the y axis ticks when \code{yAxisAsProbs} is \code{TRUE}.
+Default is \code{c(0.05, 0.25, 0.50, 0.75, 0.95)}.  Ignored if \code{yAxisAsProbs} is \code{FALSE}.}
 
-\item{legend}{If \code{TRUE} (the default is \code{NULL}) with \code{nreps>0} a legend for the appearance of the simulated ranges of the central intervals is added to the plot.  If \code{FALSE}, no legend appears. If \code{NULL}, legend always appears except when \code{lineup = TRUE}.}
+\item{nreps}{The number of replicate samples to be taken from the test distribution to construct the pointwise intervals
+for each quantile.  Default is 1000.
+From these samples, an empirical distribution is generated from the test distribution for the ordered quantiles
+corresponding to the values of\code{ppoints(length(data))}.
+These are used to construct central intervals of whatever proportions are given by \code{centralPercents}.}
 
-\item{nexemplars}{(default is 0) The number of replicate samples to be taken from the test distribution and plotted as a coloured trail on the qqplot.  Each such trail is a sample of the same size as \code{data} but truly coming from the test distribution.  Each trail gives some idea of what the shape of a qqplot would be for a sample of that size from the test distribution. Together, they give some sense of the variability in the plot's shape.}
+\item{centralPercents}{The vector of proportions determining the central intervals of the empirical distribution of
+each ordered quantile from the test distribution.
+Default is \code{c(0.90, 0.95, 0.99)} corresponding to central 90, 95, and 99\% simulated pointwise confidence
+intervals for each quantile coming from the test distribution for a sample the same size as \code{data}.
+The quality of these interval locations typically increases with \code{nreps} and decreases with the
+probability used for each interval.}
 
-\item{typex}{(default is "o", or match \code{type} if supplied) The \code{plot} type to be used in the plotting of the exemplars, legal values are the same as for the  \code{type} argument of \code{plot}.}
+\item{envelope}{If \code{TRUE} (the default), a grey envelope is plotted showing the central intervals for
+each quantile as a shade of grey.  The higher is the corresponding probability associated with the interval,
+the lighter is the shade.
+The outermost edges of the envelope are the range of the simulated data from the test distribution.
+The envelope thus provides a (pointwise) density estimate of the quantiles drawn from the test distribution for this sample size.
+If \code{FALSE} no envelope is drawn.}
 
-\item{plainTrails}{If \code{TRUE}, then a single grey colour is used for all exemplar trails.  If \code{FALSE} (the default), each exemplar trail is shown in a different colour.}
+\item{drawPercentiles}{If \code{TRUE}, a pair of curves is plotted to show each of the central intervals as a different line type.
+These are plotted over the envelope if \code{envelope} is \code{TRUE}.
+If \code{FALSE} (the default) no simulated percentile curves are drawn.}
+
+\item{drawQuartiles}{If \code{TRUE}, a pair of curves is plotted to show the quartiles (central 50\% region)
+of the ordered quantiles simulated from the test distribution.  The median of these is also plotted as a solid line type.
+These are plotted over the envelope if \code{envelope} is \code{TRUE}.
+If \code{FALSE} (the default) none of these curves are drawn.}
+
+\item{legend}{If \code{TRUE} (the default is \code{NULL}) with \code{nreps>0} a legend for the appearance
+of the simulated ranges of the central intervals is added to the plot.
+If \code{FALSE}, no legend appears. If \code{NULL}, legend always appears except when \code{lineup = TRUE}.}
+
+\item{legend.xy}{Either a string being one of \code{c("bottomright", "bottom", "bottomleft", "left", "topleft","top", "topright", "right", "center")}
+ (default is \code{"topleft"}) or a list with named components \code{x} and \code{y}
+to be interpreted exactly as in the function \code{legend()} from the \code{graphics} package.}
+
+\item{legend.cex}{Character expansion size for legend (default 0.8).}
+
+\item{nexemplars}{(default is 0) The number of replicate samples to be taken from the test distribution and
+plotted as a coloured trail on the qqplot.
+Each such trail is a sample of the same size as \code{data} but truly coming from the test distribution.
+Each trail gives some idea of what the shape of a qqplot would be for a sample of that size from the test distribution.
+Together, they give some sense of the variability in the plot's shape.}
+
+\item{typex}{(default is "o", or match \code{type} if supplied) The \code{plot} type to be used in the
+plotting of the exemplars, legal values are the same as for the  \code{type} argument of \code{plot}.}
+
+\item{plainTrails}{If \code{TRUE}, then a single grey colour is used for all exemplar trails.
+If \code{FALSE} (the default), each exemplar trail is shown in a different colour.}
 
 \item{colTrails}{Colours to be used for the trails (default will be multi-colours).}
 
-\item{alphaTrails}{The alpha transparency to be used in plotting all exemplar trails. The default is 0.25.  Because the trails will over plot, a smaller \code{alphaTrails} value is recommended as \code{nexemplars} increases.}
+\item{alphaTrails}{The alpha transparency to be used in plotting all exemplar trails. The default is 0.25.
+Because the trails will overplot, a smaller \code{alphaTrails} value is recommended as \code{nexemplars} increases.}
 
-\item{lwdTrails}{The graphical line width (\code{lwd}) to be used in plotting all exemplar trails.   The default is 1.  Because the trails will over plot, combining a larger \code{lwdTrails} with \code{envelope = FALSE}, a lower \code{alphaTrails} value larger \code{nexemplars} can give a truer sense of the density of qqplot configurations than with \code{envelope = TRUE}.}
+\item{lwdTrails}{The graphical line width (\code{lwd}) to be used in plotting all exemplar trails.   The default is 1.
+Because the trails will overplot, combining a larger \code{lwdTrails} with \code{envelope = FALSE},
+a lower \code{alphaTrails} value larger \code{nexemplars} can give a truer sense of the density of qqplot
+configurations than with \code{envelope = TRUE}.}
 
-\item{lineup}{If \code{TRUE} (default is \code{FALSE}) the qqplot of \code{data} is randomly located in a grid of \code{nsuspects} plots.  Identical arguments are given to construct all \code{qqtest} plots in the grid.  Assuming the viewer has not seen the qqplot of this \code{data} before, a successful selection of the true \code{data} plot out of the grid of plots corresponds to evidence against the hypothesis that the \code{data} come from the test distribution.  Significance level is 1/\code{nsuspects}.  Each plot is given a suspect number from 1 to \code{nsuspects} (left to right, top to bottom).  The suspect number of the plot corresponding to the actual \code{data} is returned, slightly obfuscated to help keep the test honest.}
+\item{lineup}{If \code{TRUE} (default is \code{FALSE}) the qqplot of \code{data} is randomly located in a
+grid of \code{nsuspects} plots.  Identical arguments are given to construct all \code{qqtest} plots in the grid.
+Assuming the viewer has not seen the qqplot of this \code{data} before, a successful selection of the true \code{data}
+plot out of the grid of plots corresponds to evidence against the hypothesis that the \code{data} come from the test distribution.
+Significance level is 1/\code{nsuspects}.
+Similarly, if the viewer narrows the selection down to only k possible subjects AND the true location is among them, then
+the corresponding observed level of significance (p-value) would be k//\code{nsuspects}.
+
+Each plot is given a suspect number from 1 to \code{nsuspects} (left to right, top to bottom).
+The suspect number of the plot corresponding to the actual \code{data} is returned, slightly obfuscated to help keep the test honest.}
 
 \item{nsuspects}{The total number of plots (default is 20) to be viewed in the lineup display when \code{lineup} is \code{lineup}.}
 
@@ -95,31 +232,67 @@ qqtest(data, dist = c("gaussian", "normal", "log-normal", "half-normal",
 
 \item{type}{The graphical parameter \code{type} for the points of the qqplot. Default is "p".}
 
-\item{main}{The graphical parameter \code{main} providing a title for the plot.  If \code{NULL} (the default), the title will be "qqtest" when \code{lineup = FALSE} and "Suspect: " followed by the plot number when \code{lineup = TRUE}.  An empty string will suppress the title.}
+\item{main}{The graphical parameter \code{main} providing a title for the plot.
+If \code{NULL} (the default), the title will be "qqtest" when \code{lineup = FALSE} and "Suspect: " followed by
+the plot number when \code{lineup = TRUE}.  An empty string will suppress the title.}
 
-\item{xlab}{The graphical parameter \code{xlab} labelling the x axis of the plot.  If \code{NULL} (the default), an \code{xlab} is created based on the information available from the other arguments to \code{qqtest} about the test distribution.  An empty string will suppress the labelling.}
+\item{xlab}{The graphical parameter \code{xlab} labelling the x axis of the plot.
+If \code{NULL} (the default), an \code{xlab} is created based on the information available from the
+other arguments to \code{qqtest} about the test distribution.  An empty string will suppress the labelling.}
 
-\item{ylab}{The graphical parameter \code{ylab} labelling the y axis of the plot.  If \code{NULL} (the default), a \code{ylab} is created based on the information available from the other arguments to \code{qqtest}. An empty string will suppress the labelling.}
+\item{ylab}{The graphical parameter \code{ylab} labelling the y axis of the plot.
+If \code{NULL} (the default), a \code{ylab} is created based on the information available from the other
+arguments to \code{qqtest}. An empty string will suppress the labelling.}
 
 \item{xlim}{The graphical parameter \code{xlim} determining the display limits of the x axis.}
 
 \item{ylim}{The graphical parameter \code{ylim} determining the display limits of the y axis.}
 
-\item{axes}{The graphical parameter \code{axes} determining whether axes are to be displayed (default is \code{NULL} which the same as \code{TRUE} except when \code{lineup=TRUE}, then \code{axes} is \code{FALSE}).}
+\item{axes}{The graphical parameter \code{axes} determining whether axes are to be displayed
+(default is \code{NULL} which the same as \code{TRUE} except when \code{lineup=TRUE}, then \code{axes} is \code{FALSE}).}
 
-\item{bty}{The graphical parameter \code{bty} determining the type of box to be used to enclose the plot (default is \code{"o"}, set \code{bty="n"} for no box).}
+\item{bty}{The graphical parameter \code{bty} determining the type of box to be used to
+enclose the plot (default is \code{"o"}, set \code{bty="n"} for no box).}
 
 \item{...}{Any further graphical parameters to be passed to the \code{plot} function.}
 }
 \value{
-Displays the qqplot.  If \code{lineup} is \code{TRUE}, it returns a list with the location (\code{TrueLoc}) of the plot that corresponds to \code{data} encoded as a string whose contents need to be evaluated.  This provides some simple obfuscation of the true location so that the visual assessment can be honest.
+Displays the qqplot.
+
+Invisibly returns a list with named components \code{x} and \code{y} giving the horizontal and
+vertical locations of the points in order.  The result of \code{qqtest} must be assigned to get these.
+The calues could then be used to identify or label points in the display.
+
+When \code{lineup} is \code{TRUE}, it returns a string encoding
+the true location of the data as a calculation to be evaluated.  This provides some simple obfuscation of the true
+location so that the visual assessment can be honest.  The true location is revealed by calling \code{revealLocation()}
+on the returned value.
 }
 \description{
-Draws a quantile-quantile plot for visually assessing whether the data come from a test distribution that has been defined in one of many ways.
+Draws a quantile-quantile plot for visually assessing whether the data come
+   from a test distribution that has been defined in one of many ways.
+
    The vertical axis plots the data quantiles, the horizontal those of a test distribution.
-   Interval estimates and exemplars provide different comparative information to assess the evidence provided by the qqplot against the hypothesis that the data come from the test distribution (default is normal or gaussian).  Interval estimates provide test information related to individual quantiles, exemplars provide test information related to the shape of the quantile quantile curve.
-   Optionally, a visual test of significance (a lineup plot) can be displayed to provide a coarse level of significance for testing the null hypothesis that the data come from the test distribution.
-   The default behaviour generates 1000 samples from the test distribution and overlays the plot with pointwise interval estimates for the ordered quantiles from the test distribution.  Various option choices are available to effect different visualizations of the uncertainty surrounding the quantile quantile plot.  These include overlaying independently generated exemplar test distribution sample quantile traces so as to assess the joint (as opposed to pointwise) distribution of quantiles. See argument descriptions and examples for more details.
+
+   Interval estimates and exemplars provide different comparative information to assess the
+   evidence provided by the qqplot against the hypothesis that the data come from the test distribution
+   (default is normal or gaussian).
+   Interval estimates provide test information related to individual quantiles,
+   exemplars provide test information related to the shape of the quantile quantile curve.
+
+   Optionally, a visual test of significance (a lineup plot) can be displayed to provide a
+   coarse level of significance for testing the null hypothesis that the data come from the
+   test distribution.
+
+   The default behaviour generates 1000 samples from the test distribution and overlays the
+   plot with pointwise interval estimates for the ordered quantiles from the test distribution.
+
+   Various option choices are available to effect different visualizations of the
+   uncertainty surrounding the quantile quantile plot.
+   These include overlaying independently generated exemplar test distribution sample
+   quantile traces so as to assess the joint (as opposed to pointwise) distribution of quantiles.
+
+   See argument descriptions and examples for more details.
 }
 \examples{
 #
@@ -173,14 +346,14 @@ qqtest(precip, nexemplars=5,
 #
 #
 #  gaussian - qqplot, but now showing in the line up
-result <- qqtest(precip, lineup=TRUE, main="Suspect", legend=FALSE,
-                 cex=0.75, col="grey20", ylab="", pch=21)
+trueLoc <- qqtest(precip, lineup=TRUE, main="Suspect", legend=FALSE,
+                  cex=0.75, col="grey20", ylab="", pch=21)
 # the location of the real data in the line up can be found by evaluating
 # the contents of the string
- result$TrueLoc
+trueLoc
 #
-# Cut and paste the string contents into the R console, or evaluate
- eval(parse(text=result$TrueLoc))
+# Cut and paste the string contents into the R console, or simply
+revealLocation(trueLoc)
 #
 #
 # log-normal ... using the bacteria data from Whipple(1916)
@@ -237,6 +410,21 @@ with (penicillin,
        pos=2, cex=0.75)
 	}
 )
+
+# Alternatively, use the returned results for a lot less work
+results <- qqtest(penicillin$value, yAxisProbs=c(0.1, 0.75, 0.90, 0.95),
+                     dist="half-normal",
+                     ylab="Sample cumulative probability",
+                     xlab="Half-normal cumulative probability")
+tags <- row.names(penicillin)[results$order]
+selPoints <- 28:31          # going to label only the largest effects
+xoffset <- c(0.01, 0.02, 0.03, 0.075)  # text function is a bit off
+text(results$x[selPoints]-xoffset, results$y[selPoints],
+     tags[selPoints],
+     pos=2, cex=0.75)
+
+# or the same points could have been identified interactively vusing
+# identify(results$x, results$y, labels = row.names(penicillin)[results$order])
 #
 # K on 9 df  ... see help(dkay)
 # Use data on primer paint thickness (standard deviations on n=10)
@@ -304,4 +492,3 @@ with(iris, {
 	)
 par(op)
 }
-
