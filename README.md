@@ -2,7 +2,6 @@
 
 Incorporates uncertainty in its qqplot display(s) so that the user might have a better sense of the evidence against the specified distributional hypothesis. 
     
-    
 ## Self calibrating quantile-quantile plots
 
 Quantile–quantile plots, or qqplots, are an important visual tool for many applications but their interpretation requires some care and often more experience. This apparent subjectivity is unnecessary. By drawing on the computational and display facilities now widely available, qqplots are easily enriched to help with their interpretation. 
@@ -26,7 +25,7 @@ Please read the reference for more explanation on and the historical development
 
 ### Historical data sets
 
-The package also contains a collection of data sets which have appeared in the literature through the historical development of the quantile plot and the quantile quantile plots.
+The package also contains a collection of data sets which have appeared in the literature through the historical development of the quantile plot and the quantile quantile plots.  See the reference/help for information on these.
 
 ### The K distribution
 
