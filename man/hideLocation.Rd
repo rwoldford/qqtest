@@ -22,7 +22,7 @@ Hides the true location of the data as a non-obvious calculation string.
 \examples{
 trueLoc <- hideLocation(3,100)
 trueLoc
-revealLocation(ans)
+revealLocation(trueLoc)
 
 n <- 200
 trueLoc <- sample(1:n, 3)

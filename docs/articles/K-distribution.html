@@ -58,8 +58,18 @@
     </li>
   </ul>
 </li>
+<li>
+  <a href="../news/index.html">Changelog</a>
+</li>
       </ul>
-<ul class="nav navbar-nav navbar-right"></ul>
+<ul class="nav navbar-nav navbar-right">
+<li>
+  <a href="https://github.com/rwoldford/qqtest">
+    <span class="fa fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
 </div>
 <!--/.nav-collapse -->
   </div>
@@ -109,7 +119,7 @@ As m increases, Km has better properties
 <div id="normal-theory-relations" class="section level2">
 <h2 class="hasAnchor">
 <a href="#normal-theory-relations" class="anchor"></a>Normal theory relations</h2>
-<p>Perhaps the most obvious relation between a normal random variate and a <span class="math inline">\(K_m\)</span> is that if <span class="math inline">\(Z \ sim N(0,1)\)</span>, then <span class="math inline">\(|Z|\sim K_1\)</span>.</p>
+<p>Perhaps the most obvious relation between a normal random variate and a <span class="math inline">\(K_m\)</span> is that if <span class="math inline">\(Z \sim N(0,1)\)</span>, then <span class="math inline">\(|Z|\sim K_1\)</span>, the half-normal.</p>
 <p>More important in applications is that distribution of the estimator of the sample standard deviation is proportional to a <span class="math inline">\(K_m\)</span>. To be precise, if <span class="math inline">\(Y_1, \ldots, Y_n\)</span> are independent and identically distributed as <span class="math inline">\(N(\mu, \sigma^2)\)</span> random variates, with realizations <span class="math inline">\(y_1, \ldots, y_n\)</span> and the usual estimates <span class="math inline">\(\widehat{\mu} = \sum y_i /n\)</span> and <span class="math inline">\(\widehat{\sigma} = \sqrt{\sum (y_i - \widehat{\mu})^2/(n-1)}\)</span>, then the corresponding estimators <span class="math inline">\(\widetilde{\mu}\)</span> and <span class="math inline">\(\widetilde{\sigma}\)</span> are distributed as <span class="math display">\[ \widetilde{\mu} \sim N(\mu, \frac{\sigma^2}{n})  ~~~~~\text{and} ~~~~~  \frac{\widetilde{\sigma}}{\sigma} \sim K_{n-1}. \]</span> The latter shows that <span class="math inline">\(K_m\)</span> is used for inference (e.g. tests and confidence intervals) about <span class="math inline">\(\sigma\)</span>.</p>
 <p>This is handy because the <span class="math inline">\(K_m\)</span> quantiles vary much less than do those of <span class="math inline">\(\chi^2_m\)</span>. For example, condider the following table of the cumulative distribution.</p>
 <table class="table">

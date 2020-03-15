@@ -96,9 +96,17 @@
     </li>
   </ul>
 </li>
+<li>
+  <a href="../news/index.html">Changelog</a>
+</li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/rwoldford/qqtest">
+    <span class="fa fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -137,17 +145,17 @@
     <p>Returns the value of the each calculation.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code>hideLocation</code></p></div>
+    <div class='dont-index'><p><code><a href='hideLocation.html'>hideLocation</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>trueLoc</span> <span class='kw'>&lt;-</span> <span class='fu'>hideLocation</span>(<span class='fl'>3</span>,<span class='fl'>100</span>)
-<span class='no'>trueLoc</span></div><div class='output co'>#&gt; [1] "2^(log(31798466644.008, base=11) - 8.5)"</div><div class='input'><span class='fu'>revealLocation</span>(<span class='no'>ans</span>)</div><div class='output co'>#&gt; <span class='error'>Error in revealLocation(ans): object 'ans' not found</span></div><div class='input'>
+    <pre class="examples"><div class='input'><span class='no'>trueLoc</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='hideLocation.html'>hideLocation</a></span>(<span class='fl'>3</span>,<span class='fl'>100</span>)
+<span class='no'>trueLoc</span></div><div class='output co'>#&gt; [1] "2^(log(8542330233307635712, base=5) - 25.5)"</div><div class='input'><span class='fu'>revealLocation</span>(<span class='no'>trueLoc</span>)</div><div class='output co'>#&gt; [1] 3</div><div class='input'>
 <span class='no'>n</span> <span class='kw'>&lt;-</span> <span class='fl'>200</span>
 <span class='no'>trueLoc</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span>(<span class='fl'>1</span>:<span class='no'>n</span>, <span class='fl'>3</span>)
-<span class='no'>trueLoc</span></div><div class='output co'>#&gt; [1] 29 86 73</div><div class='input'><span class='no'>ans</span> <span class='kw'>&lt;-</span> <span class='fu'>hideLocation</span>(<span class='no'>trueLoc</span> , <span class='no'>n</span>)
-<span class='no'>ans</span></div><div class='output co'>#&gt; [1] "2^(log(2.81676678731814e+20, base=13) - 13.5)"
-#&gt; [2] "2^(log(1.04695287812504e+34, base=15) - 22.5)"
-#&gt; [3] "2^(log(8.27833785061919e+34, base=15) - 23.5)"</div><div class='input'><span class='fu'>revealLocation</span>(<span class='no'>ans</span>)</div><div class='output co'>#&gt; [1] 29 86 73</div><div class='input'>
+<span class='no'>trueLoc</span></div><div class='output co'>#&gt; [1] 186  66  76</div><div class='input'><span class='no'>ans</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='hideLocation.html'>hideLocation</a></span>(<span class='no'>trueLoc</span> , <span class='no'>n</span>)
+<span class='no'>ans</span></div><div class='output co'>#&gt; [1] "2^(log(1.42134939202773e+34, base=15) - 21.5)"
+#&gt; [2] "2^(log(6.50141073010706e+25, base=7) - 24.5)" 
+#&gt; [3] "2^(log(1.68251629901732e+24, base=13) - 15.5)"</div><div class='input'><span class='fu'>revealLocation</span>(<span class='no'>ans</span>)</div><div class='output co'>#&gt; [1] 186  66  76</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

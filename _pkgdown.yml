@@ -1,0 +1,40 @@
+home:
+  strip_header: true
+
+navbar:
+  type: default
+  right:
+    - icon: fa-github fa-lg
+      href: https://github.com/rwoldford/qqtest
+
+development:
+  mode: release
+
+reference:
+  - title: qqtest functionality
+    desc:  "main functions for quantile quantile testing"
+    contents:
+    - qqtest
+    - revealLocation
+    - hideLocation
+
+  - title: K distribution
+    desc:  "Density, distribution function, quantile function and random generation for the K distribution"
+    contents:
+    - dkay
+    - pkay
+    - qkay
+    - rkay
+
+  - title: Data
+    desc:  "A collection of historical data sets used to illustrate quantile quantile plots."
+    contents:
+    - bacteria
+    - penicillin
+    - primer
+    - pullstrength
+    - sittingHeights
+    - stacklossDistances
+    - WachusettReservoir
+
+

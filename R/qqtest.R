@@ -74,13 +74,21 @@
 #' the order statistics \code{p*np}.
 #'
 #' @param matchMethod It is necessary to match locations and scales of the two distributions.  The method used to do this matching
-#' is given by \code{matchMethod} which must be one of \code{c("hinges","quartiles")}.
+#' is given by \code{matchMethod} which must be one of \code{c("hinges","quartiles", "middlehalf", "bottomhalf", "tophalf")}.
 #' A line is fitted to the data and its coefficients used to adjust the location and scale of the test quantiles to match the data.
 #'
 #' If \code{matchMethod = "hinges"} (the default), then the line is fit to \code{(x, y)} pairs given by the three central values of
-#' \code{fivenum()} on each of the coordinates; if "quartiles" the three quartiles of each coordinate are paired and a line fit.
+#' \code{fivenum()} on each of the coordinates; if \code{"quartiles"} the three quartiles of each coordinate are paired and a line fit.
+#' The method \code{"middlehalf"}, as the name suggests, fits a line to the middle half of the sorted data.  In this way, it is very similar
+#' to the previous two methods.  All three are fairly robust and use the central part of the data to estimate the location and scale based roughly
+#' on matching medians and inter-quartile spreads.
 #'
-#' Note that the user may supply their own matching method by providing a function having vector arguments \code{x} and \code{y}
+#' The remaining two methods, \code{"bottomhalf"} and \code{"tophalf"}, use a line fitted to the bottom and top half of the sorted data.
+#' These are not generally recommended but might be used when the comparison \code{dist} is skewed.  For example with a chi-squared distribution,
+#' one might use \code{bottomhalf} to match on data from the shorter left tail of the distribution.  Similarly, \code{"tophalf"} might be
+#' preferred when \code{dist} is skewed in the opposite direction.
+#'
+#' Finally, note that the user may supply their own matching method by providing a function having vector arguments \code{x} and \code{y}
 #' for the horizontal and vertical quantiles which returns a vector of coefficients (intercept, slope) for the line to be used to match
 #' the quantile location and scales.
 #' @param xAxisAsProbs If \code{TRUE} (the default is FALSE) the horizontal axis will be labelled as probabilities.
@@ -183,9 +191,9 @@
 #'
 #' @return Displays the qqplot.
 #'
-#' Invisibly returns a list with named components \code{x} and \code{y} giving the horizontal and
-#' vertical locations of the points in order.  The result of \code{qqtest} must be assigned to get these.
-#' The calues could then be used to identify or label points in the display.
+#' Invisibly returns a list with named components \code{x}, \code{y}, and \code{order} giving the horizontal and
+#' vertical locations of the points in sorted order, as well as the order vector from the input data.   The result of \code{qqtest} must be assigned to get these.
+#' The values could then, for example, be used to identify or label points in the display.
 #'
 #' When \code{lineup} is \code{TRUE}, it returns a string encoding
 #' the true location of the data as a calculation to be evaluated.  This provides some simple obfuscation of the true
@@ -371,33 +379,7 @@
 #' 		       dataTest=beaver1[,"temp"],
 #' 		       ylab="Beaver 2", xlab="Beaver 1",
 #' 		       main="Beaver body temperatures")
-#' #
-#' #
-#' # For the famous iris data, does the sample of iris versicolor
-#' # appear to have the same (marginal) distributional shape
-#' # as does that of iris virginica (to which it is more closely related)?
-#' #
-#' op <- par(mfrow=c(2,2))
-#' with(iris, {
-#' 	qqtest(Sepal.Length[Species=="versicolor"],
-#' 		   dataTest= Sepal.Length[Species=="virginica"],
-#' 		   ylab="versicolor", xlab="virginica",
-#' 		   main="Sepal length")
-#' 	qqtest(Sepal.Width[Species=="versicolor"],
-#' 		   dataTest= Sepal.Width[Species=="virginica"],
-#' 		   ylab="versicolor", xlab="virginica",
-#' 		   main="Sepal width", legend=FALSE)
-#' 	qqtest(Petal.Length[Species=="versicolor"],
-#' 		   dataTest=Petal.Length[Species=="virginica"],
-#' 		   ylab="versicolor", xlab="virginica",
-#' 		   main="Petal length", legend=FALSE)
-#' 	qqtest(Petal.Width[Species=="versicolor"],
-#' 		   dataTest= Petal.Width[Species=="virginica"],
-#' 		   ylab="versicolor", xlab="virginica",
-#' 		   main="Petal width", legend=FALSE)
-#' 	}
-#' 	)
-#' par(op)
+#'
 
 
 
@@ -414,7 +396,7 @@ qqtest <- function (data,
                     p=NULL,
                     a=NULL,
                     np = NULL,
-                    matchMethod = c("hinges","quartiles", "highbreakdown"),
+                    matchMethod = c("hinges","quartiles", "middlehalf", "bottomhalf", "tophalf"),
                     xAxisAsProbs = FALSE,
                     yAxisAsProbs = FALSE,
                     xAxisProbs =  c(0.05, 0.25, 0.50, 0.75, 0.95),
@@ -456,6 +438,8 @@ qqtest <- function (data,
   if (is.matrix(data) || is.data.frame(data)) {
     data <- data.matrix(data)[,1]
   }
+  data_order <- order(data)
+  sorted_data <- data[data_order]
 
   if (is.null(typex)){
     typex <- if (is.null(type))  "o" else type
@@ -715,24 +699,54 @@ qqtest <- function (data,
   # Use a line fit to get the location scale correction for the
   # data sampled from the test distribution.
   # Method of determining line given by value of matchMethod
-
+  #
+  # Two variables are used
   if (is.function(matchMethod)) {
     # Some user supplied function that must take x and y as arguments,
     # Fit a line and return a vector of coefficients as (Intercept, slope)
-    locScaleCoefs <- matchMethod(x = q, y = data)
+    locScaleCoefs <- matchMethod(x = q, y = sorted_data)
     loc <- locScaleCoefs[1]
     scale <- locScaleCoefs[2]
   } else {
     matchMethod <- match.arg(matchMethod)
     switch(matchMethod,
            hinges = {
-             locScaleLine <<-  lm(y ~ x, data = data.frame(x = fivenum(q)[2:4],
-                                                           y = fivenum(data)[2:4]))
+             locScaleLine <-  stats::lm(y ~ x, data = data.frame(x = fivenum(q)[2:4],
+                                                                 y = fivenum(data)[2:4]))
            },
 
+           bottomhalf = {
+             n <- length(data)
+             start_index <- 1
+             end_index <- trunc(n/2)
+             indices_selected <- seq(start_index, end_index)
+             locScaleLine <-  stats::lm(y ~ x, data = data.frame(x = q[indices_selected],
+                                                                 y = sorted_data[indices_selected]))
+           },
+
+
+           middlehalf = {
+             n <- length(data)
+             start_index <- trunc(n/4)
+             end_index <- trunc(3*n/4)
+             indices_selected <- seq(start_index, end_index)
+             locScaleLine <-  stats::lm(y ~ x, data = data.frame(x = q[indices_selected],
+                                                                 y = sorted_data[indices_selected]))
+           },
+
+           tophalf = {
+             n <- length(data)
+             start_index <- trunc(3*n/4)
+             end_index <- n
+             indices_selected <- seq(start_index, end_index)
+             locScaleLine <-  stats::lm(y ~ x, data = data.frame(x = q[indices_selected],
+                                                                 y = sorted_data[indices_selected]))
+           },
+
+
            quartiles = {
-             locScaleLine <<-  lm(y ~ x, data = data.frame(x = fivenum(q)[2:4],
-                                                           y = fivenum(data)[2:4]))
+             locScaleLine <-  stats::lm(y ~ x, data = data.frame(x = fivenum(q)[2:4],
+                                                                 y = fivenum(data)[2:4]))
            },
            stop("No such 'matchMethod'"))
     loc <- locScaleLine$coefficients[1]
@@ -1082,9 +1096,9 @@ qqtest <- function (data,
                title=paste("Simulated ranges", "n =", nreps))
       } else {
         legend(legend.xy,
-               legend = c("Range",paste(signif(100*rev(centralPercents),3),
-                                        "% central range",
-                                        sep="")),
+               legend = c("Range", paste(signif(100*rev(centralPercents),3),
+                                         "% central range",
+                                         sep="")),
                col=fillCols,
                fill=fillCols,
                border=fillCols,
@@ -1100,14 +1114,13 @@ qqtest <- function (data,
       plot_colour <- grDevices::hcl(h=h, c=c, l=l, alpha=alpha)
     } else {plot_colour <- col}
 
-    points(q,sort(data),
+    points(q, sorted_data,
            col=plot_colour,
            type=type,
            pch=pch,
            cex=if(is.null(cex)) 1 else cex
     )
-    data_order <- order(data)
-    returnValue <- list(x = q, y = data[data_order], order = data_order)
+    returnValue <- list(x = q, y = sorted_data, order = data_order)
     invisible(returnValue) # returned only if assigned.
   } #end of else from #lineup
 }

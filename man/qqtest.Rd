@@ -23,7 +23,7 @@ qqtest(
   p = NULL,
   a = NULL,
   np = NULL,
-  matchMethod = c("hinges", "quartiles", "highbreakdown"),
+  matchMethod = c("hinges", "quartiles", "middlehalf", "bottomhalf", "tophalf"),
   xAxisAsProbs = FALSE,
   yAxisAsProbs = FALSE,
   xAxisProbs = c(0.05, 0.25, 0.5, 0.75, 0.95),
@@ -113,13 +113,21 @@ When \code{p} and \code{np} are provided all simulation is based on simulating v
 the order statistics \code{p*np}.}
 
 \item{matchMethod}{It is necessary to match locations and scales of the two distributions.  The method used to do this matching
-is given by \code{matchMethod} which must be one of \code{c("hinges","quartiles")}.
+is given by \code{matchMethod} which must be one of \code{c("hinges","quartiles", "middlehalf", "bottomhalf", "tophalf")}.
 A line is fitted to the data and its coefficients used to adjust the location and scale of the test quantiles to match the data.
 
 If \code{matchMethod = "hinges"} (the default), then the line is fit to \code{(x, y)} pairs given by the three central values of
-\code{fivenum()} on each of the coordinates; if "quartiles" the three quartiles of each coordinate are paired and a line fit.
+\code{fivenum()} on each of the coordinates; if \code{"quartiles"} the three quartiles of each coordinate are paired and a line fit.
+The method \code{"middlehalf"}, as the name suggests, fits a line to the middle half of the sorted data.  In this way, it is very similar
+to the previous two methods.  All three are fairly robust and use the central part of the data to estimate the location and scale based roughly
+on matching medians and inter-quartile spreads.
 
-Note that the user may supply their own matching method by providing a function having vector arguments \code{x} and \code{y}
+The remaining two methods, \code{"bottomhalf"} and \code{"tophalf"}, use a line fitted to the bottom and top half of the sorted data.
+These are not generally recommended but might be used when the comparison \code{dist} is skewed.  For example with a chi-squared distribution,
+one might use \code{bottomhalf} to match on data from the shorter left tail of the distribution.  Similarly, \code{"tophalf"} might be
+preferred when \code{dist} is skewed in the opposite direction.
+
+Finally, note that the user may supply their own matching method by providing a function having vector arguments \code{x} and \code{y}
 for the horizontal and vertical quantiles which returns a vector of coefficients (intercept, slope) for the line to be used to match
 the quantile location and scales.}
 
@@ -259,9 +267,9 @@ enclose the plot (default is \code{"o"}, set \code{bty="n"} for no box).}
 \value{
 Displays the qqplot.
 
-Invisibly returns a list with named components \code{x} and \code{y} giving the horizontal and
-vertical locations of the points in order.  The result of \code{qqtest} must be assigned to get these.
-The calues could then be used to identify or label points in the display.
+Invisibly returns a list with named components \code{x}, \code{y}, and \code{order} giving the horizontal and
+vertical locations of the points in sorted order, as well as the order vector from the input data.   The result of \code{qqtest} must be assigned to get these.
+The values could then, for example, be used to identify or label points in the display.
 
 When \code{lineup} is \code{TRUE}, it returns a string encoding
 the true location of the data as a calculation to be evaluated.  This provides some simple obfuscation of the true
@@ -464,31 +472,5 @@ qqtest(precip,
 		       dataTest=beaver1[,"temp"],
 		       ylab="Beaver 2", xlab="Beaver 1",
 		       main="Beaver body temperatures")
-#
-#
-# For the famous iris data, does the sample of iris versicolor
-# appear to have the same (marginal) distributional shape
-# as does that of iris virginica (to which it is more closely related)?
-#
-op <- par(mfrow=c(2,2))
-with(iris, {
-	qqtest(Sepal.Length[Species=="versicolor"],
-		   dataTest= Sepal.Length[Species=="virginica"],
-		   ylab="versicolor", xlab="virginica",
-		   main="Sepal length")
-	qqtest(Sepal.Width[Species=="versicolor"],
-		   dataTest= Sepal.Width[Species=="virginica"],
-		   ylab="versicolor", xlab="virginica",
-		   main="Sepal width", legend=FALSE)
-	qqtest(Petal.Length[Species=="versicolor"],
-		   dataTest=Petal.Length[Species=="virginica"],
-		   ylab="versicolor", xlab="virginica",
-		   main="Petal length", legend=FALSE)
-	qqtest(Petal.Width[Species=="versicolor"],
-		   dataTest= Petal.Width[Species=="virginica"],
-		   ylab="versicolor", xlab="virginica",
-		   main="Petal width", legend=FALSE)
-	}
-	)
-par(op)
+
 }

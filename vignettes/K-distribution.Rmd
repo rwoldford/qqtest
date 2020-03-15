@@ -93,7 +93,7 @@ par(op)
 These values were calculated using the `dkay(...)` density function.  For example, `dkay(1.0, df=10) = ` `r dkay(1.0, df=10)`.
 
 ## Normal theory relations
-Perhaps the most obvious relation between a normal random variate and a $K_m$ is that if $Z \ sim N(0,1)$, then $|Z|\sim K_1$.
+Perhaps the most obvious relation between a normal random variate and a $K_m$ is that if $Z \sim N(0,1)$, then $|Z|\sim K_1$, the half-normal.
 
 More important in applications is that distribution of the estimator of the sample standard deviation is proportional to a $K_m$.  To be precise, if $Y_1, \ldots, Y_n$ are independent and identically distributed as $N(\mu, \sigma^2)$ random variates, with realizations $y_1, \ldots, y_n$ and the usual estimates $\widehat{\mu} = \sum y_i /n$ and $\widehat{\sigma} = \sqrt{\sum (y_i - \widehat{\mu})^2/(n-1)}$, then the corresponding estimators $\widetilde{\mu}$ and $\widetilde{\sigma}$ are distributed as
 \[ \widetilde{\mu} \sim N(\mu, \frac{\sigma^2}{n})  ~~~~~\text{and} ~~~~~  \frac{\widetilde{\sigma}}{\sigma} \sim K_{n-1}. \]

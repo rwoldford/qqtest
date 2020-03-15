@@ -18,7 +18,7 @@ Reveals the location by parsing and evaluating the string.
 \examples{
 trueLoc <- hideLocation(3,100)
 trueLoc
-revealLocation(ans)
+revealLocation(trueLoc)
 
 n <- 200
 trueLoc <- sample(1:n, 3)

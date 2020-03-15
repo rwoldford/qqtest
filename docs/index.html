@@ -73,8 +73,18 @@
     </li>
   </ul>
 </li>
+<li>
+  <a href="news/index.html">Changelog</a>
+</li>
       </ul>
-<ul class="nav navbar-nav navbar-right"></ul>
+<ul class="nav navbar-nav navbar-right">
+<li>
+  <a href="https://github.com/rwoldford/qqtest">
+    <span class="fa fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
 </div>
 <!--/.nav-collapse -->
   </div>
@@ -87,9 +97,39 @@
       </header><div class="row">
   <div class="contents col-md-9">
 <div id="qqtest" class="section level1">
-<div class="page-header"><h1 class="hasAnchor">
-<a href="#qqtest" class="anchor"></a>qqtest</h1></div>
-<p>Self calibrating quantile-quantile plots</p>
+
+<div id="self-calibrating-quantile-quantile-plots" class="section level2">
+<h2 class="hasAnchor">
+<a href="#self-calibrating-quantile-quantile-plots" class="anchor"></a>Self calibrating quantile-quantile plots</h2>
+<p>Quantile–quantile plots, or qqplots, are an important visual tool for many applications but their interpretation requires some care and often more experience. This apparent subjectivity is unnecessary. By drawing on the computational and display facilities now widely available, qqplots are easily enriched to help with their interpretation.</p>
+<p>A new enhanced qqplot, the self-calibrating qqplot, is introduced and demonstrated on a variety of examples (all examples from the original paper appear on the help/reference page for <code>qqtest</code>).</p>
+<p>Possibilities are endless. Some standard examples include normal qqplots, log-normal plots, half-normal plots (e.g. for factorial experiments), and the comparison of empirical distributions. Self-calibration is had by visually incorporating sampling variation in the qqplot display in a variety of ways.</p>
+<p>A self-calibrating plot can be created for any distribution whose quantile function can be provided by the user, making them useful for a wide variety of applications.</p>
+<p>The plots are particularly helpful to students gaining experience in interpreting quantile-quantile plots, and to instructors hoping to teach basic understanding and interpretation of quantile-quantile plots.</p>
+<p>Please read the reference for more explanation on and the historical development of the quantile-quantile plot.</p>
+<div id="historical-data-sets" class="section level3">
+<h3 class="hasAnchor">
+<a href="#historical-data-sets" class="anchor"></a>Historical data sets</h3>
+<p>The package also contains a collection of data sets which have appeared in the literature through the historical development of the quantile plot and the quantile quantile plots.</p>
+</div>
+<div id="the-k-distribution" class="section level3">
+<h3 class="hasAnchor">
+<a href="#the-k-distribution" class="anchor"></a>The K distribution</h3>
+<p>The package also provides the usual functions for a distribution which we have used with considerable success in teaching undergraduate introductory statistics courses. This distribution is a simply transformation of the chi-squared, namely if X has a chi-squared distribution on m degrees of freedom then Y = sqrt(X/m) has a <em>K distribution on m degrees of freedom</em>.</p>
+<p>This is a much more natural distribution to work with in the practice and development of standard normal theory inference as described in nearly every first course in Statistics. It is, for example, the distribution of the sample standard deviation. It is also much more nearly symmetric and concentrates around y = 1 as its degrees of freedom increase. It has much to recommend it. See the article/vignette on the K distribution.</p>
+<p>The package provides the usual suite of functions: <code><a href="reference/dkay.html">dkay()</a></code>, <code><a href="reference/pkay.html">pkay()</a></code>, <code><a href="reference/qkay.html">qkay()</a></code>, and <code><a href="reference/rkay.html">rkay()</a></code>. (These seem particularly apt name choices given the Scottish pronunciation of “Kay” is the same as “Chi”.)</p>
+</div>
+<div id="reference" class="section level3">
+<h3 class="hasAnchor">
+<a href="#reference" class="anchor"></a>Reference</h3>
+<ul>
+<li>
+<p>R. Wayne Oldford (2016), “Self calibrating quantile-quantile plots”, <em>The American Statistician</em>, <em>70</em>, pp. 74-90.</p>
+<p><a href="https://doi.org/10.1080/00031305.2015.1090338" class="uri">https://doi.org/10.1080/00031305.2015.1090338</a></p>
+</li>
+</ul>
+</div>
+</div>
 </div>
   </div>
 
