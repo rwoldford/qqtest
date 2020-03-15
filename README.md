@@ -32,7 +32,7 @@ The package also contains a collection of data sets which have appeared in the l
 
 The package also provides the usual functions for a distribution which we have used with considerable success in teaching undergraduate introductory statistics courses.  This distribution is a simply transformation of the chi-squared, namely if X has a chi-squared distribution on m degrees of freedom then Y = sqrt(X/m) has a *K distribution on m degrees of freedom*.
 
-This is a much more natural distribution to work with in the practice and development of standard normal theory inference as described in nearly every first course in Statistics.  It is, for example, the distribution of the sample standard deviation.  It is also much more nearly symmetric and concentrates around y = 1 as its degrees of freedom increase.  It has much to recommend it.  See the article/vignette on the K distribution.  
+This is a much more natural distribution to work with in the practice and development of standard normal theory inference as described in nearly every first course in Statistics.  It is, for example, the distribution of the sample standard deviation  divided by sigma, i.e. `s/sigma`.  It is also much more nearly symmetric and concentrates around y = 1 as its degrees of freedom increase.  It has much to recommend it.  See the article/vignette on the K distribution.  
 
 The package provides the usual suite of functions: `dkay()`, `pkay()`, `qkay()`, and `rkay()`.
 (These seem particularly apt name choices given the Scottish pronunciation of "Kay" is the same as "Chi".)
