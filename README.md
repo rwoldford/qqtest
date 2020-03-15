@@ -1,5 +1,8 @@
-# qqtest
+## qqtest
 
+Incorporates uncertainty in its qqplot display(s) so that the user might have a better sense of the evidence against the specified distributional hypothesis. 
+    
+    
 ## Self calibrating quantile-quantile plots
 
 Quantile–quantile plots, or qqplots, are an important visual tool for many applications but their interpretation requires some care and often more experience. This apparent subjectivity is unnecessary. By drawing on the computational and display facilities now widely available, qqplots are easily enriched to help with their interpretation. 
@@ -8,11 +11,18 @@ A new enhanced qqplot, the self-calibrating qqplot, is introduced and demonstrat
 
 Possibilities are endless.  Some standard examples include normal qqplots, log-normal plots, half-normal plots (e.g. for factorial experiments), and the comparison of empirical distributions. Self-calibration is had by visually incorporating sampling variation in the qqplot display in a variety of ways. 
 
+`qqtest` draws a quantile quantile plot for visually assessing whether the data come from a test distribution that has been defined in one of many ways.   The vertical axis plots the data quantiles, the horizontal those of a test distribution. The default behaviour generates 1000 samples from the test distribution and overlays the plot with shaded pointwise interval estimates for the ordered quantiles from the test distribution.  A small number of independently generated exemplar quantile plots can also be overlaid. 
+    
+Both the interval estimates and the exemplars provide different comparative information to assess the evidence provided by the qqplot for or against the hypothesis that the data come from the test distribution (default is normal or gaussian).  
+    
+Finally, a visual test of significance (a lineup plot) can also be displayed to test the null hypothesis that the data come from the test distribution.
+
 A self-calibrating plot can be created for any distribution whose quantile function can be provided by the user, making them useful for a wide variety of applications.
 
 The plots are particularly helpful to students gaining experience in interpreting quantile-quantile plots, and to instructors hoping to teach basic understanding and interpretation of quantile-quantile plots.
 
 Please read the reference for more explanation on and the historical development of the quantile-quantile plot.
+
 
 ### Historical data sets
 
