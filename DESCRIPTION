@@ -30,10 +30,11 @@ Imports:
     grDevices,
     stats
 NeedsCompilation: no
-Packaged: 2020-03-14 16:37:10 EST; rwoldford
+Packaged: 2020-03-15 16:37:10 EST; rwoldford
 Author: Wayne Oldford [aut, cre]
 Encoding: UTF-8
 RoxygenNote: 7.0.2
 Suggests: knitr,
     rmarkdown
 VignetteBuilder: knitr
+URL: https://github.com/rwoldford/qqtest, https://rwoldford.github.io/qqtest/
