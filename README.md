@@ -36,6 +36,16 @@ This is a much more natural distribution to work with in the practice and develo
 The package provides the usual suite of functions: `dkay()`, `pkay()`, `qkay()`, and `rkay()`.
 (These seem particularly apt name choices given the Scottish pronunciation of "Kay" is the same as "Chi".)
 
+### Installation
+
+To install `qqtest`: 
+
+- from github: `devtools::install_github("rwoldford.github.io/qqtest/")`
+- from CRAN: `install.packages("qqtest")`
+
+*Documentation*:   https://rwoldford.github.io/qqtest/
+
+
 ### Reference
 
 - R. Wayne Oldford  (2016), "Self calibrating quantile-quantile plots", *The American Statistician*, *70*, pp. 74-90.
