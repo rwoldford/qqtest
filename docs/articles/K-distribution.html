@@ -234,15 +234,16 @@ As m increases, Km has better properties
 <div id="the-student-t-distribution" class="section level3">
 <h3 class="hasAnchor">
 <a href="#the-student-t-distribution" class="anchor"></a>The Student t distribution</h3>
-<p>For the standard normal theory, the Student <span class="math inline">\(t_m\)</span> distribution can be defined as follows. If <span class="math inline">\(Z \sim N(0,1)\)</span> and <span class="math inline">\(Y \sim K_m\)</span> is distributed independently of <span class="math inline">\(Z\)</span>, then the ratio <span class="math display">\[T=\frac{Z}{Y} = \frac{N(0,1)}{K_m} = t_m.\]</span> For the estimators from the above model <span class="math display">\[\frac{\widetilde{\mu} - \mu}
-       {\widetilde{\sigma}} 
+<p>For the standard normal theory, the Student <span class="math inline">\(t_m\)</span> distribution can be defined as follows. If <span class="math inline">\(Z \sim N(0,1)\)</span> and <span class="math inline">\(Y \sim K_m\)</span> is distributed independently of <span class="math inline">\(Z\)</span>, then the ratio <span class="math display">\[T=\frac{Z}{Y} = \frac{N(0,1)}{K_m} = t_m\]</span> which is fairly easy to remember.</p>
+<p>For the estimators from the above model <span class="math display">\[\frac{\widetilde{\mu} - \mu}
+       {\widetilde{\sigma} / \sqrt{n}}
        = \frac{ \frac{\widetilde{\mu}-\mu}
-                     {\sigma}
+                     {\sigma/\sqrt{n}}
                      }
               {\frac{\widetilde{\sigma}}
                     {\sigma}
                     }
-               = \frac{N(0,1)}{K_m} = t_m\]</span> is used to construct interval estimates and tests for the value of the parameter <span class="math inline">\(\mu\)</span>.</p>
+               = \frac{N(0,1)}{K_{n-1}} = t_{n-1} \]</span> is used to construct interval estimates and tests for the value of the parameter <span class="math inline">\(\mu\)</span>.</p>
 </div>
 </div>
 </div>

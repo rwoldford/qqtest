@@ -119,17 +119,19 @@ To get observed significance levels, the cumulative distribution function `pkay(
 ### The Student t distribution
 
 For the standard normal theory, the Student $t_m$ distribution can be defined as follows. If $Z \sim N(0,1)$ and $Y \sim K_m$ is distributed independently of $Z$, then the ratio
-\[T=\frac{Z}{Y} = \frac{N(0,1)}{K_m} = t_m.\]
+\[T=\frac{Z}{Y} = \frac{N(0,1)}{K_m} = t_m\]
+which is fairly easy to remember.
+
 For the estimators from the above model
 \[\frac{\widetilde{\mu} - \mu}
-       {\widetilde{\sigma}} 
+       {\widetilde{\sigma} / \sqrt{n}}
        = \frac{ \frac{\widetilde{\mu}-\mu}
-                     {\sigma}
+                     {\sigma/\sqrt{n}}
                      }
               {\frac{\widetilde{\sigma}}
                     {\sigma}
                     }
-               = \frac{N(0,1)}{K_m} = t_m\]
+               = \frac{N(0,1)}{K_{n-1}} = t_{n-1} \]
 is used to construct interval estimates and tests for the value of the parameter $\mu$.
 
 # The functions
