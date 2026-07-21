@@ -6,6 +6,8 @@ man-roxygen
 ../.DS_Store
 ../.gitignore
 ../_pkgdown.yml
+^cran-comments\.md$
+^cran-submit\.R$
 ^.*\.Rproj$
 ^\.Rproj\.user$
 ^_pkgdown\.yml$
