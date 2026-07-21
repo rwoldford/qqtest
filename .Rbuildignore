@@ -18,3 +18,4 @@ man-roxygen
 ^Meta$
 ^\.travis\.yml$
 ^codecov\.yml$
+^CRAN-SUBMISSION$
