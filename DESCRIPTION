@@ -1,11 +1,9 @@
 Package: qqtest
 Type: Package
 Title: Self Calibrating Quantile-Quantile Plots for Visual Testing
-Version: 1.2.0
-Date: 2020-03-14
+Version: 1.2.1
 Authors@R: person("Wayne", "Oldford", email="rwoldford@uwaterloo.ca",
     role=c("aut", "cre"))
-Maintainer: Wayne Oldford <rwoldford@uwaterloo.ca>
 Description: Provides the function qqtest which incorporates uncertainty in its
     qqplot display(s) so that the user might have a better sense of the
     evidence against the specified distributional hypothesis.  qqtest draws a
@@ -30,10 +28,8 @@ Imports:
     grDevices,
     stats
 NeedsCompilation: no
-Packaged: 2020-03-15 16:37:10 EST; rwoldford
-Author: Wayne Oldford [aut, cre]
 Encoding: UTF-8
-RoxygenNote: 7.0.2
+RoxygenNote: 7.3.3
 Suggests: knitr,
     rmarkdown
 VignetteBuilder: knitr

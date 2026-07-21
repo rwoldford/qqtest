@@ -4,10 +4,12 @@
 \name{penicillin}
 \alias{penicillin}
 \title{31 contrast sums from a 32 run 2^(5-0) factorial experiment on penicillin production.}
-\format{A data frame with 31 rows and 1 variate:
+\format{
+A data frame with 31 rows and 1 variate:
 \describe{
   \item{value}{value of contrast for that row}
-}}
+}
+}
 \source{
 "Use of Half-Normal Plots in Interpreting Factorial Two-Level Experiments", 
 Cuthbert Daniel, Technometrics, Vol. 1, No. 4 (Nov., 1959), pp. 311-341.  

@@ -6,7 +6,7 @@
 \source{
 "Self calibrating quantile-quantile plots",
 R. Wayne Oldford, The American Statistician, 70, (2016)
-\url{https://doi.org/10.1080/00031305.2015.1090338}
+\doi{10.1080/00031305.2015.1090338}
 
 "Unbiased Plotting Positions -- A Review",
 C. Cunnane, Journal of Hydrology, Vol. 37 (1978), pp. 205-222.

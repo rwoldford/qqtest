@@ -1,3 +1,8 @@
+url: https://rwoldford.github.io/qqtest/
+
+template:
+  bootstrap: 5
+
 home:
   strip_header: true
 
@@ -5,6 +10,7 @@ navbar:
   type: default
   right:
     - icon: fa-github fa-lg
+      aria-label: Github
       href: https://github.com/rwoldford/qqtest
 
 development:

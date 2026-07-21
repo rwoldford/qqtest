@@ -7,9 +7,11 @@
 hideLocation(trueLoc, nSubjects)
 }
 \arguments{
-\item{trueLoc}{A vector of one or more numbers in the set {1, 2, ..., nSubjects} whose locations are to be hidden.}
+\item{trueLoc}{A vector of one or more numbers in the set
+\{1, 2, ..., \code{nSubjects}\} whose locations are to be hidden.}
 
-\item{nSubjects}{An integer larger than 1 used to define the set {1, 2, ..., nSubjects}.}
+\item{nSubjects}{An integer larger than 1 used to define the set
+\{1, 2, ..., \code{nSubjects}\}.}
 }
 \value{
 Returns a character vector, each element being a string

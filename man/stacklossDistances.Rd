@@ -4,11 +4,13 @@
 \name{stacklossDistances}
 \alias{stacklossDistances}
 \title{Mahalanobis squared distances of Brownlee's stack loss plant operation data based only on the explanatory variates (air flow, water temperature, and acid concentration).}
-\format{A data frame with 21 rows and 2 variates:
+\format{
+A data frame with 21 rows and 2 variates:
 \describe{
   \item{ordinary}{Mahalanobis squared distances from the arithemetic mean using the eliptical contours of the sample covariance matrix.}
   \item{robust}{As with distances, these are Mahalobis squared distances butnow based on robust measures of location and covariance matrix (as determined from the default covRob of the robust package).}
-}}
+}
+}
 \source{
 "Statistical Theory and Methodology in Science and Engineering", 
 K.A. Brownlee, (1960, 2nd ed. 1965), Wiley, New York pp. 491-500.

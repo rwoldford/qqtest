@@ -4,7 +4,8 @@
 \name{sittingHeights}
 \alias{sittingHeights}
 \title{Sitting height in inches of female adults (aged 23-50).}
-\format{A data frame with 9 rows and 8 variates, the first 5 of which are as recorded by Galton:
+\format{
+A data frame with 9 rows and 8 variates, the first 5 of which are as recorded by Galton:
 \describe{
   \item{lowerBound}{Sitting height greater than or equal to this lower bound in inches.}
   \item{upperBound}{Sitting height strictly less than this upper bound in inches.}
@@ -14,7 +15,8 @@
   \item{binCentre}{Average of the lower and upper bounds.}
   \item{nCasesCentred}{Number of cases assigned to the binCentre; half of cases observed with sitting height between the two bounds is assigned to be below the binCentre, half above (avoids producing 100 percent for last entry).}
   \item{proportionCumulativeAdjusted}{Cumulative proportions using nCasesCentred. }
-}}
+}
+}
 \source{
 "The Application of a Graphic Method to Fallible Measures", 
 Francis Galton, (1885), Journal of the Statistical Society of London, Jubilee Volume (June 22-24, 1885), pp. 262-265.

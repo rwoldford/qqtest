@@ -1,0 +1,33 @@
+# 31 contrast sums from a 32 run 2^(5-0) factorial experiment on penicillin production.
+
+Values are arranged in decreasing order of absolute magnitude. Name of
+the contrast effect is given as the row name of each value. Daniel(1959)
+uses the data to illustrate the use of half-normal plots. In his words:
+"We need, of course, some rule of inference that will help us to be
+objective in judging whether or not the largest effects are real."
+
+## Usage
+
+``` r
+penicillin
+```
+
+## Format
+
+A data frame with 31 rows and 1 variate:
+
+- value:
+
+  value of contrast for that row
+
+## Source
+
+"Use of Half-Normal Plots in Interpreting Factorial Two-Level
+Experiments", Cuthbert Daniel, Technometrics, Vol. 1, No. 4 (Nov.,
+1959), pp. 311-341. Daniel cites: Davies, O. L., Editor: Design and
+Analysis of Industrial Experiments, Second Edition, Oliver and Boyd,
+London, and Hafner, New York, 1956 as the original.
+
+## Details
+
+`qqtest(penicillin[1],dist="half-normal")` will effect Daniel's plot.

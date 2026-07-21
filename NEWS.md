@@ -1,3 +1,9 @@
+# qqtest 1.2.1
+
+## Documentation
+
+* Replaced a DOI URL with `\doi{}` markup.
+* Corrected literal braces in the documentation for `hideLocation()`.
 
 # qqtest 1.2.0 
 

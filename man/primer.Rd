@@ -4,7 +4,8 @@
 \name{primer}
 \alias{primer}
 \title{Automobile primer paint thickness quality control measurements.}
-\format{A data frame with 20 rows and 14 variates:
+\format{
+A data frame with 20 rows and 14 variates:
 \describe{
   \item{day}{Day on which the parts were taken and measured.}
   \item{batch}{Either the first or second set of 10 consecutive parts taken.}
@@ -20,7 +21,8 @@
   \item{sel10}{Thickness of primer in mils on the tenth part sampled in the specified batch of that day.}
   \item{xbar}{Arithmetic average of the measurements of primer thickness of the 10 parts selected in the specified batch of that day.}
   \item{s}{Sample standard deviation of the measurements of primer thickness of the 10 parts selected in the specified batch of that day.}
-}}
+}
+}
 \source{
 "Statistical Process Control - SPC", 
 Automotive Industry Action Group(AIAG), Southfield MI,  (1995), page 64.

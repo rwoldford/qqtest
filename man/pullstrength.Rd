@@ -4,14 +4,16 @@
 \name{pullstrength}
 \alias{pullstrength}
 \title{Strength of pull for 519 males aged 23-26.}
-\format{A data frame with 7 rows and 4 variates:
+\format{
+A data frame with 7 rows and 4 variates:
 \describe{
   \item{strength}{Pull strength lower bound in pounds.}
   \item{nCases}{Number of cases observed with pull strength between this bound and the next.}
   \item{percentCases}{Percent of cases observed with pull strength between this bound and the next.}
   \item{percentCumulative}{Cumulative percent of cases observed with pull strength up to this bound.}
   \item{percentAdjustedCumulative}{Adjust Galton's cumulative percent to include only half  the cases between this bound and the next.}
-}}
+}
+}
 \source{
 "Natural Inheritance", 
 Francis Galton, (1889), Table 1, page 199.

@@ -4,7 +4,8 @@
 \name{WachusettReservoir}
 \alias{WachusettReservoir}
 \title{Storage, in millions of gallons daily per square mile of net land area, at the Wachusett Reservoir in Massacusetts - storage computed for each of several rates of draft (draft being a determined maintainable flow in 1,000s of gallons per square mile daily).}
-\format{A data frame with 15 rows and 6 variates:
+\format{
+A data frame with 15 rows and 6 variates:
 \describe{
   \item{draft100}{Computed storage, in millions of gallons per square mile of land area, given a draft of 100,000 gallons per square mile daily.}
   \item{draft200}{Computed storage, in millions of gallons per square mile of land area, given a draft of 200,000 gallons per square mile daily.}
@@ -12,7 +13,8 @@
   \item{draft600}{Computed storage, in millions of gallons per square mile of land area, given a draft of 600,000 gallons per square mile daily.}
   \item{draft800}{Computed storage, in millions of gallons per square mile of land area, given a draft of 800,000 gallons per square mile daily.}
   \item{draft1000}{Computed storage, in millions of gallons per square mile of land area, given a draft of 1,000,000 gallons per square mile daily.}
-}}
+}
+}
 \source{
 "Storage to be provided in impounding reservoirs for municipal water supply (with discussion)", 
 Allen Hazen, Transactions of the American Society of Civil Engineers, Vol. 77, (1914), pp. 1539-1669.

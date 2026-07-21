@@ -5,12 +5,14 @@
 \alias{bacteria}
 \title{Bacteria from Delaware River water entering the Torresdale Filter 
 of the Philadelphia water supply 1913.}
-\format{A data frame with 22 rows and 2 variates:
+\format{
+A data frame with 22 rows and 2 variates:
 \describe{
   \item{count}{Number of bacteria per cc.}
   \item{percentTime}{Percent of days (out of 365) having bacteria count 
 less than or equal to the measured count.}
-}}
+}
+}
 \source{
 "The Element of Chance in Sanitation", 
 George C. Whipple, Journal of the Franklin Institue, Volume 182,

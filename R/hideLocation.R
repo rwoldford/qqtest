@@ -5,9 +5,10 @@
 #'
 #' @export hideLocation
 #'
-#' @param trueLoc A vector of one or more numbers in the set {1, 2, ..., nSubjects} whose locations are to be hidden.
-#' @param nSubjects An integer larger than 1 used to define the set {1, 2, ..., nSubjects}.
-#'
+#' @param trueLoc A vector of one or more numbers in the set
+#'   \{1, 2, ..., \code{nSubjects}\} whose locations are to be hidden.
+#' @param nSubjects An integer larger than 1 used to define the set
+#'   \{1, 2, ..., \code{nSubjects}\}.
 #' @return Returns a character vector, each element being a string
 #' containing an obscure calculation which, if parsed and evaluated, would return
 #' the value of the corresponding number in \code{trueLoc}.
