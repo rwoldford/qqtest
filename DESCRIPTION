@@ -29,8 +29,8 @@ Imports:
     stats
 NeedsCompilation: no
 Encoding: UTF-8
-RoxygenNote: 7.3.3
 Suggests: knitr,
     rmarkdown
 VignetteBuilder: knitr
 URL: https://github.com/rwoldford/qqtest, https://rwoldford.github.io/qqtest/
+Config/roxygen2/version: 8.0.0
